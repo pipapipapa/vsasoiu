@@ -164,7 +164,7 @@ module Top_Module (
     wire [3:0]  opcode = IR[15:12];
     wire [2:0]  reg_dst = IR[11:9];
     wire [2:0]  reg_src1 = IR[8:6];
-    wire [2:0]  reg_src2 = IR[5:3];
+    wire [2:0] reg_src2 = (opcode == 4'b0111) ? reg_dst : IR[5:3];
     wire [5:0]  imm6 = IR[5:0];
     wire [11:0] imm12 = IR[11:0];
     
