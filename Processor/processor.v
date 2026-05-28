@@ -144,7 +144,11 @@ endmodule
 
 module Top_Module (
     input clk,
-    input rst
+    input rst,
+
+    output [11:0] out_PC,
+    output [15:0] out_IR,
+    output [15:0] out_ALU
 );
     // Программный счетчик (PC) и регистр инструкций (IR)
     reg [11:0] PC;
@@ -168,7 +172,7 @@ module Top_Module (
     wire [3:0]  opcode = IR[15:12];
     wire [2:0]  reg_dst = IR[11:9];
     wire [2:0]  reg_src1 = IR[8:6];
-    wire [2:0]  reg_src2 = (opcode == 4'b0111) ? reg_dst : IR[5:3];
+    wire [2:0]  reg_src2 = (opcode == 4'b0111 || opcode == 4'b1001) ? reg_dst : IR[5:3];
     wire [5:0]  imm6 = IR[5:0];
     wire [11:0] imm12 = IR[11:0];
     
@@ -223,4 +227,8 @@ module Top_Module (
                 PC <= PC + 1;
         end
     end
+
+    assign out_PC = PC;
+    assign out_IR = IR;
+    assign out_ALU = alu_res;
 endmodule
