@@ -1,70 +1,68 @@
 `timescale 1ns / 1ps
 
 module tb_Top_Module();
-
-    // Сигналы для подключения к процессору
     reg clk;
     reg rst;
 
-    // Экземпляр процессора (UUT - Unit Under Test)
     Top_Module uut (
         .clk(clk),
         .rst(rst)
     );
 
-    // Генерация тактового сигнала (Clock) с периодом 10 нс (100 МГц)
     initial begin
         clk = 0;
         forever #5 clk = ~clk; 
     end
 
-    // Основной блок симуляции
     initial begin
-        // Включение записи временных диаграмм (для GTKWave)
         $dumpfile("processor_wave.vcd");
         $dumpvars(0, tb_Top_Module);
 
-        // Инициализация памяти данных (Тестовые векторы)
-        uut.Data_Mem[0] = 16'd15; // Первое слагаемое
-        uut.Data_Mem[1] = 16'd25; // Второе слагаемое
-        uut.Data_Mem[2] = 16'd0;  // Сюда запишем результат
+        // Входные данные
+        uut.Data_Mem[0] = 16'd15; // 0000 1111 (Bin)
+        uut.Data_Mem[1] = 16'd25; // 0001 1001 (Bin)
+        uut.Data_Mem[2] = 16'd0;  
+        uut.Data_Mem[3] = 16'd0;  
+        uut.Data_Mem[4] = 16'd0; // ошибка, если BEQ не сработает
 
-        // Загрузка программы в память инструкций (Машинный код)
-        uut.Instr_Mem[0] = 16'h6200; // LOAD  R1, 0(R0)
-        uut.Instr_Mem[1] = 16'h6401; // LOAD  R2, 1(R0)
-        uut.Instr_Mem[2] = 16'h0650; // ADD   R3, R1, R2
-        uut.Instr_Mem[3] = 16'h7602; // STORE R3, 2(R0)
-        uut.Instr_Mem[4] = 16'h8004; // JUMP  4
+        uut.Instr_Mem[0]  = 16'h6200; // 0: LOAD R1, 0(R0)   
+        uut.Instr_Mem[1]  = 16'h6401; // 1: LOAD R2, 1(R0)   
+        uut.Instr_Mem[2]  = 16'h0650; // 2: ADD R3, R1, R2   
+        uut.Instr_Mem[3]  = 16'h1888; // 3: SUB R4, R2, R1   
+        uut.Instr_Mem[4]  = 16'h2A50; // 4: AND R5, R1, R2   
+        uut.Instr_Mem[5]  = 16'h3C50; // 5: OR  R6, R1, R2 
+        uut.Instr_Mem[6]  = 16'h4E50; // 6: XOR R7, R1, R2 
+        uut.Instr_Mem[7]  = 16'h5240; // 7: NOT R1, R1       
+        uut.Instr_Mem[8]  = 16'h9001; // 8: BEQ R0, R0, +1   
+        uut.Instr_Mem[9]  = 16'h800D; // 9: JUMP 13          
+        uut.Instr_Mem[10] = 16'h7602; // 10: STORE R3, 2(R0) 
+        uut.Instr_Mem[11] = 16'h7803; // 11: STORE R4, 3(R0) 
+        uut.Instr_Mem[12] = 16'h800C; // 12: JUMP 12         
+        uut.Instr_Mem[13] = 16'h7A04; // 13: STORE R5, 4(R0)
 
-        // Аппаратный сброс (Reset)
+        // Запуск
         rst = 1;
-        #15;      // Ждем 1.5 такта
-        rst = 0;  // Отпускаем сброс, процессор начинает работу
+        #15;      
+        rst = 0;  
 
-        // Ждем достаточное время для выполнения 5 инструкций
-        // У нас 4 такта на инструкцию: 5 * 4 * 10 нс = 200 нс
-        #250;
+        #800;
 
-        // Вывод результатов в консоль
-        $display("      results     ");
-        $display("Input:");
-        $display("Data_Mem[0] = %d", uut.Data_Mem[0]);
-        $display("Data_Mem[1] = %d", uut.Data_Mem[1]);
+        $display("R3 (ADD) = %d  | 40", uut.RF.regs[3]);
+        $display("R4 (SUB) = %d  | 10", uut.RF.regs[4]);
+        $display("R5 (AND) = %d  | 9", uut.RF.regs[5]);
+        $display("R6 (OR)  = %d  | 31", uut.RF.regs[6]);
+        $display("R7 (XOR) = %d  | 22", uut.RF.regs[7]);
+        $display("R1 (NOT) = %d  | 65520", uut.RF.regs[1]);
         $display("----------------------------------------");
-        $display("Registers after:");
-        $display("R1 = %d", uut.RF.regs[1]);
-        $display("R2 = %d", uut.RF.regs[2]);
-        $display("R3 = %d (sum in register)", uut.RF.regs[3]);
-        $display("----------------------------------------");
-        $display("memory after exec store:");
-        $display("Data_Mem[2] = %d", uut.Data_Mem[2]);
+        $display("BEQ test:");
         
-        if (uut.Data_Mem[2] == 16'd40)
-            $display(">>> success <<<");
+        if (uut.Data_Mem[4] == 16'd9)
+            $display("unsuccess beq");
+        else if (uut.Data_Mem[2] == 16'd40 && uut.Data_Mem[3] == 16'd10)
+            $display("succcess");
         else
-            $display(">>> unsucces <<<");
+            $display("unsuccess mem");
             
         $finish;
     end
-
 endmodule
