@@ -93,44 +93,54 @@ module Control_Unit (
     end
 
     // 3. комбинационая логика выходов
-    // Управляющие сигналы расставляются в зависимости от текущего такта и декодированного opcode.
     always @(*) begin
         // Значения по умолчанию
         PC_Write = 0; IR_Write = 0; Reg_Write = 0; Mem_Write = 0; Mem_Read = 0;
-        Branch_En = 0; Jump_En = 0; ALU_Src = 2'b00; ALU_Op = 3'b000; Reg_Dst_Sel = 2'b00;
+        Branch_En = 0; Jump_En = 0; Reg_Dst_Sel = 2'b00;
 
+        // ИСПРАВЛЕНИЕ: Сигналы для АЛУ зависят только от инструкции. 
+        // Это гарантирует стабильный адрес памяти во время такта WRITEBACK!
+        ALU_Src = 2'b00;
+        ALU_Op  = 3'b000;
+        case (opcode)
+            4'b0000: ALU_Op = 3'b000; // ADD
+            4'b0001: ALU_Op = 3'b001; // SUB
+            4'b0010: ALU_Op = 3'b010; // AND
+            4'b0011: ALU_Op = 3'b011; // OR
+            4'b0100: ALU_Op = 3'b100; // XOR
+            4'b0101: ALU_Op = 3'b101; // NOT
+            4'b0110: begin ALU_Src = 2'b01; ALU_Op = 3'b000; end // LOAD
+            4'b0111: begin ALU_Src = 2'b01; ALU_Op = 3'b000; end // STORE
+            4'b1001: begin ALU_Op = 3'b001; end // BEQ
+        endcase
+
+        // Сигналы, зависящие от текущего такта (FSM State)
         case (current_state)
             FETCH: begin
                 IR_Write = 1;
             end
             
             DECODE: begin
-                // Подготовка к выполнению (чтение регистров происходит асинхронно в DataPath)
+                // Ожидание чтения из регистрового файла
             end
             
             EXECUTE: begin
                 case (opcode)
-                    4'b0000: ALU_Op = 3'b000; // ADD
-                    4'b0001: ALU_Op = 3'b001; // SUB
-                    4'b0010: ALU_Op = 3'b010; // AND
-                    4'b0011: ALU_Op = 3'b011; // OR
-                    4'b0100: ALU_Op = 3'b100; // XOR
-                    4'b0101: ALU_Op = 3'b101; // NOT
-                    4'b0110: begin ALU_Src = 2'b01; ALU_Op = 3'b000; Mem_Read = 1; end // LOAD
-                    4'b0111: begin ALU_Src = 2'b01; ALU_Op = 3'b000; Mem_Write = 1; end // STORE
-                    4'b1001: begin ALU_Op = 3'b001; Branch_En = 1; end // BEQ
-                    4'b1000: Jump_En = 1; // JUMP
+                    4'b0110: Mem_Read = 1;  // LOAD
+                    4'b0111: Mem_Write = 1; // STORE
+                    4'b1001: Branch_En = 1; // BEQ
+                    4'b1000: Jump_En = 1;   // JUMP
                 endcase
             end
             
             WRITEBACK: begin
-                PC_Write = 1; // Обновляем PC в конце цикла
+                PC_Write = 1; // Обновляем программный счетчик
                 case (opcode)
                     4'b0000, 4'b0001, 4'b0010, 4'b0011, 4'b0100, 4'b0101: begin 
-                        Reg_Write = 1; Reg_Dst_Sel = 2'b00; // ALU Result
+                        Reg_Write = 1; Reg_Dst_Sel = 2'b00; // Запись результата АЛУ
                     end
                     4'b0110: begin 
-                        Reg_Write = 1; Reg_Dst_Sel = 2'b01; // Mem Data
+                        Reg_Write = 1; Reg_Dst_Sel = 2'b01; // Запись данных из памяти
                     end
                 endcase
             end

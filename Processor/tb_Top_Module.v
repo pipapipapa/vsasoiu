@@ -57,7 +57,7 @@ module tb_Top_Module();
         $display("R3 = %d (sum in register)", uut.RF.regs[3]);
         $display("----------------------------------------");
         $display("memory after exec store:");
-        $display("Data_Mem[2] = %d (target: 40)", uut.Data_Mem[2]);
+        $display("Data_Mem[2] = %d", uut.Data_Mem[2]);
         
         if (uut.Data_Mem[2] == 16'd40)
             $display(">>> success <<<");
