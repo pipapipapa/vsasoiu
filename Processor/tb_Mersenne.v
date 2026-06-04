@@ -9,6 +9,10 @@ module tb_Mersenne();
         .rst(rst)
     );
 
+    wire [15:0] debug_R1 = uut.RF.regs[1];
+    wire [15:0] debug_R3 = uut.RF.regs[3];
+    wire [15:0] debug_Mem1 = uut.Data_Mem[1];
+
     // Генератор тактов
     initial begin
         clk = 0;
@@ -19,7 +23,7 @@ module tb_Mersenne();
         $dumpfile("mersenne_wave.vcd");
         $dumpvars(0, tb_Mersenne);
 
-        uut.Data_Mem[0] = 16'd4; // n = 8
+        uut.Data_Mem[0] = 16'd3; // n = 3
         uut.Data_Mem[1] = 16'd0; // Выход
         uut.Data_Mem[2] = 16'd1; // 1
 
@@ -40,7 +44,7 @@ module tb_Mersenne();
         #15;      
         rst = 0;  
 
-        #5000;
+        #800;
 
         $display("n = %d", uut.Data_Mem[0]);
         $display("--------------------------------------------------");

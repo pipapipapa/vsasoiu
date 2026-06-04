@@ -1,5 +1,5 @@
 $date
-	Thu May 28 10:21:55 2026
+	Wed Jun 03 18:22:17 2026
 $end
 $version
 	Icarus Verilog
@@ -13,115 +13,121 @@ $var reg 1 " rst $end
 $scope module uut $end
 $var wire 1 ! clk $end
 $var wire 16 # instr_wire [15:0] $end
+$var wire 16 $ out_ALU [15:0] $end
+$var wire 16 % out_IR [15:0] $end
+$var wire 12 & out_PC [11:0] $end
 $var wire 1 " rst $end
-$var wire 16 $ write_data_to_reg [15:0] $end
-$var wire 16 % sign_ext_imm [15:0] $end
-$var wire 3 & reg_src2 [2:0] $end
-$var wire 3 ' reg_src1 [2:0] $end
-$var wire 3 ( reg_dst [2:0] $end
-$var wire 16 ) rd2 [15:0] $end
-$var wire 16 * rd1 [15:0] $end
-$var wire 4 + opcode [3:0] $end
-$var wire 6 , imm6 [5:0] $end
-$var wire 12 - imm12 [11:0] $end
-$var wire 1 . alu_zero $end
-$var wire 16 / alu_res [15:0] $end
-$var wire 16 0 alu_b_in [15:0] $end
-$var wire 1 1 Reg_Write $end
-$var wire 2 2 Reg_Dst_Sel [1:0] $end
-$var wire 1 3 PC_Write $end
-$var wire 1 4 Mem_Write $end
-$var wire 1 5 Mem_Read $end
-$var wire 1 6 Jump_En $end
-$var wire 1 7 IR_Write $end
-$var wire 1 8 Branch_En $end
-$var wire 2 9 ALU_Src [1:0] $end
-$var wire 3 : ALU_Op [2:0] $end
-$var reg 16 ; IR [15:0] $end
-$var reg 12 < PC [11:0] $end
+$var wire 16 ' write_data_to_reg [15:0] $end
+$var wire 16 ( sign_ext_imm [15:0] $end
+$var wire 3 ) reg_src2 [2:0] $end
+$var wire 3 * reg_src1 [2:0] $end
+$var wire 3 + reg_dst [2:0] $end
+$var wire 16 , rd2 [15:0] $end
+$var wire 16 - rd1 [15:0] $end
+$var wire 4 . opcode [3:0] $end
+$var wire 6 / imm6 [5:0] $end
+$var wire 12 0 imm12 [11:0] $end
+$var wire 1 1 alu_zero $end
+$var wire 16 2 alu_res [15:0] $end
+$var wire 16 3 alu_b_in [15:0] $end
+$var wire 1 4 Reg_Write $end
+$var wire 2 5 Reg_Dst_Sel [1:0] $end
+$var wire 1 6 PC_Write $end
+$var wire 1 7 Mem_Write $end
+$var wire 1 8 Mem_Read $end
+$var wire 1 9 Jump_En $end
+$var wire 1 : IR_Write $end
+$var wire 1 ; Branch_En $end
+$var wire 2 < ALU_Src [1:0] $end
+$var wire 3 = ALU_Op [2:0] $end
+$var reg 16 > IR [15:0] $end
+$var reg 12 ? PC [11:0] $end
 $scope module ALU_Inst $end
-$var wire 16 = B [15:0] $end
-$var wire 1 . Zero $end
-$var wire 3 > ALU_Op [2:0] $end
-$var wire 16 ? A [15:0] $end
-$var reg 16 @ Result [15:0] $end
+$var wire 16 @ B [15:0] $end
+$var wire 1 1 Zero $end
+$var wire 3 A ALU_Op [2:0] $end
+$var wire 16 B A [15:0] $end
+$var reg 16 C Result [15:0] $end
 $upscope $end
 $scope module CU $end
 $var wire 1 ! clk $end
-$var wire 4 A opcode [3:0] $end
+$var wire 4 D opcode [3:0] $end
 $var wire 1 " rst $end
-$var parameter 3 B DECODE $end
-$var parameter 3 C EXECUTE $end
-$var parameter 3 D FETCH $end
-$var parameter 3 E WRITEBACK $end
-$var reg 3 F ALU_Op [2:0] $end
-$var reg 2 G ALU_Src [1:0] $end
-$var reg 1 8 Branch_En $end
-$var reg 1 7 IR_Write $end
-$var reg 1 6 Jump_En $end
-$var reg 1 5 Mem_Read $end
-$var reg 1 4 Mem_Write $end
-$var reg 1 3 PC_Write $end
-$var reg 2 H Reg_Dst_Sel [1:0] $end
-$var reg 1 1 Reg_Write $end
-$var reg 3 I current_state [2:0] $end
-$var reg 3 J next_state [2:0] $end
+$var parameter 3 E DECODE $end
+$var parameter 3 F EXECUTE $end
+$var parameter 3 G FETCH $end
+$var parameter 3 H WRITEBACK $end
+$var reg 3 I ALU_Op [2:0] $end
+$var reg 2 J ALU_Src [1:0] $end
+$var reg 1 ; Branch_En $end
+$var reg 1 : IR_Write $end
+$var reg 1 9 Jump_En $end
+$var reg 1 8 Mem_Read $end
+$var reg 1 7 Mem_Write $end
+$var reg 1 6 PC_Write $end
+$var reg 2 K Reg_Dst_Sel [1:0] $end
+$var reg 1 4 Reg_Write $end
+$var reg 3 L current_state [2:0] $end
+$var reg 3 M next_state [2:0] $end
 $upscope $end
 $scope module RF $end
 $var wire 1 ! clk $end
-$var wire 3 K read_reg1 [2:0] $end
-$var wire 3 L read_reg2 [2:0] $end
-$var wire 1 1 we $end
-$var wire 16 M write_data [15:0] $end
-$var wire 3 N write_reg [2:0] $end
-$var wire 16 O read_data2 [15:0] $end
-$var wire 16 P read_data1 [15:0] $end
-$var integer 32 Q i [31:0] $end
+$var wire 3 N read_reg1 [2:0] $end
+$var wire 3 O read_reg2 [2:0] $end
+$var wire 1 4 we $end
+$var wire 16 P write_data [15:0] $end
+$var wire 3 Q write_reg [2:0] $end
+$var wire 16 R read_data2 [15:0] $end
+$var wire 16 S read_data1 [15:0] $end
+$var integer 32 T i [31:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 $comment Show the parameter values. $end
 $dumpall
-b11 E
-b0 D
-b10 C
-b1 B
+b11 H
+b0 G
+b10 F
+b1 E
 $end
 #0
 $dumpvars
-b1000 Q
+b1000 T
+bx S
+bx R
+bx Q
 bx P
 bx O
 bx N
-bx M
-bx L
-bx K
-b1 J
+b1 M
+b0 L
+b0 K
+b0 J
 b0 I
-b0 H
-b0 G
-b0 F
-bx A
+bx D
+bx C
+bx B
+b0 A
 bx @
-bx ?
-b0 >
-bx =
+b0 ?
+bx >
+b0 =
 b0 <
-bx ;
-b0 :
-b0 9
+0;
+1:
+09
 08
-17
+07
 06
-05
+b0 5
 04
-03
-b0 2
-01
+bx 3
+bx 2
+x1
 bx 0
 bx /
-x.
+bx .
 bx -
 bx ,
 bx +
@@ -129,7 +135,7 @@ bx *
 bx )
 bx (
 bx '
-bx &
+b0 &
 bx %
 bx $
 b110001000000000 #
@@ -137,1013 +143,1050 @@ b110001000000000 #
 0!
 $end
 #5000
-1.
+11
+b0 '
+b0 P
+b0 ,
+b0 R
 b0 $
-b0 M
-b0 /
+b0 2
+b0 C
+b0 3
 b0 @
-b0 0
-b0 =
+b1 <
+b1 J
+1:
+b0 -
+b0 B
+b0 S
 b0 )
 b0 O
-b1 9
-b1 G
-17
+b0 (
+b110 .
+b110 D
+b1 +
+b1 Q
 b0 *
-b0 ?
-b0 P
-b0 &
-b0 L
-b0 %
-b110 +
-b110 A
-b1 (
-b1 N
-b0 '
-b0 K
-b0 ,
-b1000000000 -
-b110001000000000 ;
+b0 N
+b0 /
+b1000000000 0
+b110001000000000 %
+b110001000000000 >
 1!
 #10000
 0!
 #15000
-b1 9
-b1 G
-07
-b10 J
-b1 I
+b1 <
+b1 J
+0:
+b10 M
+b1 L
 1!
 0"
 #20000
 0!
 #25000
-15
-b1 9
-b1 G
-b11 J
-b10 I
+18
+b1 <
+b1 J
+b11 M
+b10 L
 1!
 #30000
 0!
 #35000
-b1111 $
-b1111 M
-b1 2
-b1 H
-11
-13
-b1 9
-b1 G
-05
-b0 J
-b11 I
+b1111 '
+b1111 P
+b1 5
+b1 K
+14
+16
+b1 <
+b1 J
+08
+b0 M
+b11 L
 1!
 #40000
 0!
 #45000
-b0 $
-b0 M
-17
-b1 9
-b1 G
-b0 2
-b0 H
-01
-03
-b1 J
-b110010000000001 #
+b0 '
+b0 P
+1:
 b1 <
-b0 I
+b1 J
+b0 5
+b0 K
+04
+06
+b1 M
+b110010000000001 #
+b1 &
+b1 ?
+b0 L
 1!
 #50000
 0!
 #55000
-0.
+01
+b1 '
+b1 P
 b1 $
-b1 M
-b1 /
+b1 2
+b1 C
+b1 3
 b1 @
-b1 0
-b1 =
-b1 %
-b1 9
-b1 G
-07
-b10 J
-b10 (
-b10 N
-b1 ,
-b10000000001 -
-b1 I
-b110010000000001 ;
+b1 (
+b1 <
+b1 J
+0:
+b10 M
+b10 +
+b10 Q
+b1 /
+b10000000001 0
+b1 L
+b110010000000001 %
+b110010000000001 >
 1!
 #60000
 0!
 #65000
-15
-b1 9
-b1 G
-b11 J
-b10 I
+18
+b1 <
+b1 J
+b11 M
+b10 L
 1!
 #70000
 0!
 #75000
-b11001 $
-b11001 M
-b1 2
-b1 H
-11
-13
-b1 9
-b1 G
-05
-b0 J
-b11 I
+b11001 '
+b11001 P
+b1 5
+b1 K
+14
+16
+b1 <
+b1 J
+08
+b0 M
+b11 L
 1!
 #80000
 0!
 #85000
-b1 $
-b1 M
-17
-b1 9
-b1 G
-b0 2
-b0 H
-01
-03
+b1 '
+b1 P
+1:
+b1 <
 b1 J
+b0 5
+b0 K
+04
+06
+b1 M
 b11001010000 #
-b10 <
-b0 I
+b10 &
+b10 ?
+b0 L
 1!
 #90000
 0!
 #95000
+b101000 '
+b101000 P
 b101000 $
-b101000 M
-b101000 /
-b101000 @
-b11001 )
-b11001 O
-b11001 0
-b11001 =
-b1111 *
-b1111 ?
-b1111 P
-b10 &
-b10 L
-b10000 %
-b0 9
-b0 G
-07
-b10 J
-b0 +
-b0 A
-b11 (
-b11 N
-b1 '
-b1 K
-b10000 ,
-b11001010000 -
-b1 I
-b11001010000 ;
+b101000 2
+b101000 C
+b11001 ,
+b11001 R
+b11001 3
+b11001 @
+b1111 -
+b1111 B
+b1111 S
+b10 )
+b10 O
+b10000 (
+b0 <
+b0 J
+0:
+b10 M
+b0 .
+b0 D
+b11 +
+b11 Q
+b1 *
+b1 N
+b10000 /
+b11001010000 0
+b1 L
+b11001010000 %
+b11001010000 >
 1!
 #100000
 0!
 #105000
-b11 J
-b10 I
+b11 M
+b10 L
 1!
 #110000
 0!
 #115000
-11
-13
-b0 J
-b11 I
+14
+16
+b0 M
+b11 L
 1!
 #120000
 0!
 #125000
-17
-01
-03
-b1 J
+1:
+04
+06
+b1 M
 b1100010001000 #
-b11 <
-b0 I
+b11 &
+b11 ?
+b0 L
 1!
 #130000
 0!
 #135000
-0.
-b1111 0
-b1111 =
-b1111 )
-b1111 O
+01
+b1111 3
+b1111 @
+b1111 ,
+b1111 R
+b1010 '
+b1010 P
+b11001 -
+b11001 B
+b11001 S
 b1010 $
-b1010 M
-b11001 *
-b11001 ?
-b11001 P
-b1010 /
-b1010 @
-b1 &
-b1 L
-b1000 %
-b1 :
-b1 >
-b1 F
-07
-b10 J
-b1 +
+b1010 2
+b1010 C
+b1 )
+b1 O
+b1000 (
+b1 =
 b1 A
-b100 (
-b100 N
-b10 '
-b10 K
-b1000 ,
-b100010001000 -
 b1 I
-b1100010001000 ;
+0:
+b10 M
+b1 .
+b1 D
+b100 +
+b100 Q
+b10 *
+b10 N
+b1000 /
+b100010001000 0
+b1 L
+b1100010001000 %
+b1100010001000 >
 1!
 #140000
 0!
 #145000
-b1 :
-b1 >
-b1 F
-b11 J
-b10 I
+b1 =
+b1 A
+b1 I
+b11 M
+b10 L
 1!
 #150000
 0!
 #155000
-11
-13
-b1 :
-b1 >
-b1 F
-b0 J
-b11 I
+14
+16
+b1 =
+b1 A
+b1 I
+b0 M
+b11 L
 1!
 #160000
 0!
 #165000
-17
-b1 :
-b1 >
-b1 F
-01
-03
-b1 J
+1:
+b1 =
+b1 A
+b1 I
+04
+06
+b1 M
 b10101001010000 #
-b100 <
-b0 I
+b100 &
+b100 ?
+b0 L
 1!
 #170000
 0!
 #175000
-b11001 0
-b11001 =
-b11001 )
-b11001 O
+b11001 3
+b11001 @
+b11001 ,
+b11001 R
+b1001 '
+b1001 P
+b1111 -
+b1111 B
+b1111 S
 b1001 $
-b1001 M
-b1111 *
-b1111 ?
-b1111 P
-b1001 /
-b1001 @
-b10 &
-b10 L
-b10000 %
-b10 :
-b10 >
-b10 F
-07
-b10 J
-b10 +
+b1001 2
+b1001 C
+b10 )
+b10 O
+b10000 (
+b10 =
 b10 A
-b101 (
-b101 N
-b1 '
-b1 K
-b10000 ,
-b101001010000 -
-b1 I
-b10101001010000 ;
+b10 I
+0:
+b10 M
+b10 .
+b10 D
+b101 +
+b101 Q
+b1 *
+b1 N
+b10000 /
+b101001010000 0
+b1 L
+b10101001010000 %
+b10101001010000 >
 1!
 #180000
 0!
 #185000
-b10 :
-b10 >
-b10 F
-b11 J
+b10 =
+b10 A
 b10 I
+b11 M
+b10 L
 1!
 #190000
 0!
 #195000
-11
-13
-b10 :
-b10 >
-b10 F
-b0 J
-b11 I
+14
+16
+b10 =
+b10 A
+b10 I
+b0 M
+b11 L
 1!
 #200000
 0!
 #205000
-17
-b10 :
-b10 >
-b10 F
-01
-03
-b1 J
+1:
+b10 =
+b10 A
+b10 I
+04
+06
+b1 M
 b11110001010000 #
-b101 <
-b0 I
+b101 &
+b101 ?
+b0 L
 1!
 #210000
 0!
 #215000
+b11111 '
+b11111 P
 b11111 $
-b11111 M
-b11111 /
-b11111 @
-b11 :
-b11 >
-b11 F
-07
-b10 J
-b11 +
+b11111 2
+b11111 C
+b11 =
 b11 A
-b110 (
-b110 N
-b110001010000 -
-b1 I
-b11110001010000 ;
+b11 I
+0:
+b10 M
+b11 .
+b11 D
+b110 +
+b110 Q
+b110001010000 0
+b1 L
+b11110001010000 %
+b11110001010000 >
 1!
 #220000
 0!
 #225000
-b11 :
-b11 >
-b11 F
-b11 J
-b10 I
+b11 =
+b11 A
+b11 I
+b11 M
+b10 L
 1!
 #230000
 0!
 #235000
-11
-13
-b11 :
-b11 >
-b11 F
-b0 J
+14
+16
+b11 =
+b11 A
 b11 I
+b0 M
+b11 L
 1!
 #240000
 0!
 #245000
-17
-b11 :
-b11 >
-b11 F
-01
-03
-b1 J
+1:
+b11 =
+b11 A
+b11 I
+04
+06
+b1 M
 b100111001010000 #
-b110 <
-b0 I
+b110 &
+b110 ?
+b0 L
 1!
 #250000
 0!
 #255000
+b10110 '
+b10110 P
 b10110 $
-b10110 M
-b10110 /
-b10110 @
-b100 :
-b100 >
-b100 F
-07
-b10 J
-b100 +
+b10110 2
+b10110 C
+b100 =
 b100 A
-b111 (
-b111 N
-b111001010000 -
-b1 I
-b100111001010000 ;
+b100 I
+0:
+b10 M
+b100 .
+b100 D
+b111 +
+b111 Q
+b111001010000 0
+b1 L
+b100111001010000 %
+b100111001010000 >
 1!
 #260000
 0!
 #265000
-b100 :
-b100 >
-b100 F
-b11 J
-b10 I
+b100 =
+b100 A
+b100 I
+b11 M
+b10 L
 1!
 #270000
 0!
 #275000
-11
-13
-b100 :
-b100 >
-b100 F
-b0 J
-b11 I
+14
+16
+b100 =
+b100 A
+b100 I
+b0 M
+b11 L
 1!
 #280000
 0!
 #285000
-17
-b100 :
-b100 >
-b100 F
-01
-03
-b1 J
+1:
+b100 =
+b100 A
+b100 I
+04
+06
+b1 M
 b101001001000000 #
-b111 <
-b0 I
+b111 &
+b111 ?
+b0 L
 1!
 #290000
 0!
 #295000
-b0 0
-b0 =
+b0 3
+b0 @
+b1111111111110000 '
+b1111111111110000 P
+b0 ,
+b0 R
 b1111111111110000 $
-b1111111111110000 M
+b1111111111110000 2
+b1111111111110000 C
 b0 )
 b0 O
-b1111111111110000 /
-b1111111111110000 @
-b0 &
-b0 L
-b0 %
-b101 :
-b101 >
-b101 F
-07
-b10 J
-b101 +
+b0 (
+b101 =
 b101 A
-b1 (
-b1 N
-b0 ,
-b1001000000 -
-b1 I
-b101001001000000 ;
+b101 I
+0:
+b10 M
+b101 .
+b101 D
+b1 +
+b1 Q
+b0 /
+b1001000000 0
+b1 L
+b101001001000000 %
+b101001001000000 >
 1!
 #300000
 0!
 #305000
-b101 :
-b101 >
-b101 F
-b11 J
-b10 I
+b101 =
+b101 A
+b101 I
+b11 M
+b10 L
 1!
 #310000
 0!
 #315000
-11
-13
-b101 :
-b101 >
-b101 F
-b0 J
-b11 I
+14
+16
+b101 =
+b101 A
+b101 I
+b0 M
+b11 L
 1!
 #320000
 0!
 #325000
+b1111 '
+b1111 P
 b1111 $
-b1111 M
-b1111 /
-b1111 @
-17
-b101 :
-b101 >
-b101 F
-01
-03
-b1 J
-b1111111111110000 *
-b1111111111110000 ?
-b1111111111110000 P
+b1111 2
+b1111 C
+1:
+b101 =
+b101 A
+b101 I
+04
+06
+b1 M
+b1111111111110000 -
+b1111111111110000 B
+b1111111111110000 S
 b1001000000000001 #
-b1000 <
-b0 I
+b1000 &
+b1000 ?
+b0 L
 1!
 #330000
 0!
 #335000
-1.
-b0 $
-b0 M
-b0 /
-b0 @
-b0 *
-b0 ?
-b0 P
-b1 %
-18
-b1 :
-b1 >
-b1 F
-07
-b10 J
-b1001 +
-b1001 A
-b0 (
-b0 N
+11
 b0 '
-b0 K
-b1 ,
-b1 -
+b0 P
+b0 $
+b0 2
+b0 C
+b0 -
+b0 B
+b0 S
+b1 (
+1;
+b1 =
+b1 A
 b1 I
-b1001000000000001 ;
+0:
+b10 M
+b1001 .
+b1001 D
+b0 +
+b0 Q
+b0 *
+b0 N
+b1 /
+b1 0
+b1 L
+b1001000000000001 %
+b1001000000000001 >
 1!
 #340000
 0!
 #345000
-18
-b1 :
-b1 >
-b1 F
-b11 J
-b10 I
+1;
+b1 =
+b1 A
+b1 I
+b11 M
+b10 L
 1!
 #350000
 0!
 #355000
-13
-18
-b1 :
-b1 >
-b1 F
-b0 J
-b11 I
+16
+1;
+b1 =
+b1 A
+b1 I
+b0 M
+b11 L
 1!
 #360000
 0!
 #365000
-17
-18
-b1 :
-b1 >
-b1 F
-03
-b1 J
+1:
+1;
+b1 =
+b1 A
+b1 I
+06
+b1 M
 b111011000000010 #
-b1010 <
-b0 I
+b1010 &
+b1010 ?
+b0 L
 1!
 #370000
 0!
 #375000
-0.
+01
+b10 '
+b10 P
 b10 $
-b10 M
-b10 /
+b10 2
+b10 C
+b101000 ,
+b101000 R
+b10 3
 b10 @
-b101000 )
-b101000 O
-b10 0
-b10 =
-b11 &
-b11 L
-b10 %
-b1 9
-b1 G
-08
-b0 :
-b0 >
-b0 F
-07
-b10 J
-b111 +
-b111 A
-b11 (
-b11 N
-b10 ,
-b11000000010 -
-b1 I
-b111011000000010 ;
+b11 )
+b11 O
+b10 (
+b1 <
+b1 J
+0;
+b0 =
+b0 A
+b0 I
+0:
+b10 M
+b111 .
+b111 D
+b11 +
+b11 Q
+b10 /
+b11000000010 0
+b1 L
+b111011000000010 %
+b111011000000010 >
 1!
 #380000
 0!
 #385000
-14
-b1 9
-b1 G
-b11 J
-b10 I
+17
+b1 <
+b1 J
+b11 M
+b10 L
 1!
 #390000
 0!
 #395000
-13
-b1 9
-b1 G
-04
-b0 J
-b11 I
+16
+b1 <
+b1 J
+07
+b0 M
+b11 L
 1!
 #400000
 0!
 #405000
-17
-b1 9
-b1 G
-03
+1:
+b1 <
 b1 J
+06
+b1 M
 b111100000000011 #
-b1011 <
-b0 I
+b1011 &
+b1011 ?
+b0 L
 1!
 #410000
 0!
 #415000
+b11 '
+b11 P
+b1010 ,
+b1010 R
 b11 $
-b11 M
-b1010 )
-b1010 O
-b11 /
+b11 2
+b11 C
+b11 3
 b11 @
-b11 0
-b11 =
-b100 &
-b100 L
-b11 %
-b1 9
-b1 G
-07
-b10 J
-b100 (
-b100 N
-b11 ,
-b100000000011 -
-b1 I
-b111100000000011 ;
+b100 )
+b100 O
+b11 (
+b1 <
+b1 J
+0:
+b10 M
+b100 +
+b100 Q
+b11 /
+b100000000011 0
+b1 L
+b111100000000011 %
+b111100000000011 >
 1!
 #420000
 0!
 #425000
-14
-b1 9
-b1 G
-b11 J
-b10 I
+17
+b1 <
+b1 J
+b11 M
+b10 L
 1!
 #430000
 0!
 #435000
-13
-b1 9
-b1 G
-04
-b0 J
-b11 I
+16
+b1 <
+b1 J
+07
+b0 M
+b11 L
 1!
 #440000
 0!
 #445000
-17
-b1 9
-b1 G
-03
+1:
+b1 <
 b1 J
+06
+b1 M
 b1000000000001100 #
-b1100 <
-b0 I
+b1100 &
+b1100 ?
+b0 L
 1!
 #450000
 0!
 #455000
+01
+b1111111111110000 '
+b1111111111110000 P
 b1111111111110000 $
-b1111111111110000 M
-b1111111111110000 )
-b1111111111110000 O
-b1111111111110000 /
+b1111111111110000 2
+b1111111111110000 C
+b1111111111110000 ,
+b1111111111110000 R
+b1111111111110000 3
 b1111111111110000 @
-b1111111111110000 0
-b1111111111110000 =
-b1 &
+b1 )
+b1 O
+b1100 (
+19
+b0 <
+b0 J
+0:
+b10 M
+b1000 .
+b1000 D
+b0 +
+b0 Q
+b1100 /
+b1100 0
 b1 L
-b1100 %
-16
-b0 9
-b0 G
-07
-b10 J
-b1000 +
-b1000 A
-b0 (
-b0 N
-b1100 ,
-b1100 -
-b1 I
-b1000000000001100 ;
+b1000000000001100 %
+b1000000000001100 >
 1!
 #460000
 0!
 #465000
-16
-b11 J
-b10 I
+19
+b11 M
+b10 L
 1!
 #470000
 0!
 #475000
-13
 16
-b0 J
-b11 I
+19
+b0 M
+b11 L
 1!
 #480000
 0!
 #485000
-17
-16
-03
-b1 J
-b0 I
+1:
+19
+06
+b1 M
+b0 L
 1!
 #490000
 0!
 #495000
-16
-07
-b10 J
-b1 I
+19
+0:
+b10 M
+b1 L
 1!
 #500000
 0!
 #505000
-16
-b11 J
-b10 I
+19
+b11 M
+b10 L
 1!
 #510000
 0!
 #515000
-13
 16
-b0 J
-b11 I
+19
+b0 M
+b11 L
 1!
 #520000
 0!
 #525000
-17
-16
-03
-b1 J
-b0 I
+1:
+19
+06
+b1 M
+b0 L
 1!
 #530000
 0!
 #535000
-16
-07
-b10 J
-b1 I
+19
+0:
+b10 M
+b1 L
 1!
 #540000
 0!
 #545000
-16
-b11 J
-b10 I
+19
+b11 M
+b10 L
 1!
 #550000
 0!
 #555000
-13
 16
-b0 J
-b11 I
+19
+b0 M
+b11 L
 1!
 #560000
 0!
 #565000
-17
-16
-03
-b1 J
-b0 I
+1:
+19
+06
+b1 M
+b0 L
 1!
 #570000
 0!
 #575000
-16
-07
-b10 J
-b1 I
+19
+0:
+b10 M
+b1 L
 1!
 #580000
 0!
 #585000
-16
-b11 J
-b10 I
+19
+b11 M
+b10 L
 1!
 #590000
 0!
 #595000
-13
 16
-b0 J
-b11 I
+19
+b0 M
+b11 L
 1!
 #600000
 0!
 #605000
-17
-16
-03
-b1 J
-b0 I
+1:
+19
+06
+b1 M
+b0 L
 1!
 #610000
 0!
 #615000
-16
-07
-b10 J
-b1 I
+19
+0:
+b10 M
+b1 L
 1!
 #620000
 0!
 #625000
-16
-b11 J
-b10 I
+19
+b11 M
+b10 L
 1!
 #630000
 0!
 #635000
-13
 16
-b0 J
-b11 I
+19
+b0 M
+b11 L
 1!
 #640000
 0!
 #645000
-17
-16
-03
-b1 J
-b0 I
+1:
+19
+06
+b1 M
+b0 L
 1!
 #650000
 0!
 #655000
-16
-07
-b10 J
-b1 I
+19
+0:
+b10 M
+b1 L
 1!
 #660000
 0!
 #665000
-16
-b11 J
-b10 I
+19
+b11 M
+b10 L
 1!
 #670000
 0!
 #675000
-13
 16
-b0 J
-b11 I
+19
+b0 M
+b11 L
 1!
 #680000
 0!
 #685000
-17
-16
-03
-b1 J
-b0 I
+1:
+19
+06
+b1 M
+b0 L
 1!
 #690000
 0!
 #695000
-16
-07
-b10 J
-b1 I
+19
+0:
+b10 M
+b1 L
 1!
 #700000
 0!
 #705000
-16
-b11 J
-b10 I
+19
+b11 M
+b10 L
 1!
 #710000
 0!
 #715000
-13
 16
-b0 J
-b11 I
+19
+b0 M
+b11 L
 1!
 #720000
 0!
 #725000
-17
-16
-03
-b1 J
-b0 I
+1:
+19
+06
+b1 M
+b0 L
 1!
 #730000
 0!
 #735000
-16
-07
-b10 J
-b1 I
+19
+0:
+b10 M
+b1 L
 1!
 #740000
 0!
 #745000
-16
-b11 J
-b10 I
+19
+b11 M
+b10 L
 1!
 #750000
 0!
 #755000
-13
 16
-b0 J
-b11 I
+19
+b0 M
+b11 L
 1!
 #760000
 0!
 #765000
-17
-16
-03
-b1 J
-b0 I
+1:
+19
+06
+b1 M
+b0 L
 1!
 #770000
 0!
 #775000
-16
-07
-b10 J
-b1 I
+19
+0:
+b10 M
+b1 L
 1!
 #780000
 0!
 #785000
-16
-b11 J
-b10 I
+19
+b11 M
+b10 L
 1!
 #790000
 0!
 #795000
-13
 16
-b0 J
-b11 I
+19
+b0 M
+b11 L
 1!
 #800000
 0!
 #805000
-17
-16
-03
-b1 J
-b0 I
+1:
+19
+06
+b1 M
+b0 L
 1!
 #810000
 0!
 #815000
-16
-07
-b10 J
-b1 I
+19
+0:
+b10 M
+b1 L
 1!

@@ -1,0 +1,11 @@
+iverilog -o alu.out ALU.v tb_ALU.v
+vvp alu.out
+
+iverilog -o rf.out Register_File.v tb_Register_File.v
+vvp rf.out
+
+iverilog -o cu.out Control_Unit.v tb_Control_Unit.v
+vvp cu.out
+
+iverilog -o tm.out processor.v tb_Top_Module.v
+vvp tm.out
