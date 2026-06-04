@@ -16,32 +16,32 @@ module tb_Control_Unit();
         .ALU_Op(ALU_Op), .Reg_Dst_Sel(Reg_Dst_Sel), .Branch_En(Branch_En), .Jump_En(Jump_En)
     );
 
+    // Генерация тактов (период 10 нс)
     initial begin clk = 0; forever #5 clk = ~clk; end
 
     initial begin
         $display("control unit test");
         
-        rst = 1; #15; rst = 0; // Сброс автомата в состояние FETCH (000)
+        rst = 1; 
+        opcode = 4'b0111; // Инструкция STORE
         
-        // Проверяем инструкцию STORE (opcode 0111)
-        opcode = 4'b0111;
+        #12;
+        rst = 0; 
         
-        // Такт 1: FETCH
-        #5; 
+        // Сейчас автомат в состоянии FETCH (000)
+        #2
         $display("FETCH: IR_Write = %b | 1", IR_Write);
         
-        // Такт 2: DECODE
         #10;
         
-        // Такт 3: EXECUTE
         #10;
         $display("EXECUTE (STORE): Mem_Write = %b | 1", Mem_Write);
         
-        // Такт 4: WRITEBACK
+        // Ждем переход в WRITEBACK
         #10;
         $display("WRITEBACK (STORE): PC_Write = %b, Reg_Write = %b | 1 0", PC_Write, Reg_Write);
         
-        $display("\n");
+        $display("n");
         $finish;
     end
 endmodule
